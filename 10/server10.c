@@ -90,12 +90,11 @@ int main(void)
         return sockfd;
     }
 
-    fcntl(sockfd, F_SETFL, O_NONBLOCK);
-
+ 
     struct sockaddr_in client_addr;
     client_addr.sin_family = AF_INET;
     client_addr.sin_port = htons(SOCK_PORT);
-    client_addr.sin_addr.s_addr = inet_addr("127.0.0.1"); 
+    client_addr.sin_addr.s_addr = INADDR_ANY;
 
     if (bind(sockfd, (struct sockaddr *)&client_addr, sizeof(client_addr)) < 0)
     {
@@ -103,6 +102,8 @@ int main(void)
         return -1;
     }
     printf("Server is listening on the %d port\n", SOCK_PORT);
+
+    fcntl(sockfd, F_SETFL, O_NONBLOCK);
 
     if (listen(sockfd, 4) < 0)
     {
