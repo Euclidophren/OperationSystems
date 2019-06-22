@@ -30,9 +30,10 @@ sb->s_op = &myvfs_super_ops;        // операции над супербло�
 `drop_inode` -- для удаления дисковой копии `inode`.
 
 ---
-Интермедия: функция `generic_delete_inode`
 
-```
+Интермедия: функция `generic_delete_inode`:
+
+```с
 int generic_delete_inode(struct inode *inode)
 {
 	return 1;
